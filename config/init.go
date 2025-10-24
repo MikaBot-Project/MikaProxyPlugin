@@ -8,12 +8,14 @@ import (
 var configReloadFunc func(msg pluginIO.Message)
 var config = struct {
 	WebsocketHost string   `json:"websocket_host"`
-	Command       []string `json:"command"`
+	Commands      []string `json:"commands"`
 	Message       bool     `json:"message"`
-}{"", []string{}, false}
+	Prefixes      []string `json:"prefixes"`
+}{"", []string{}, false, []string{}}
 var WebsocketHost string
-var Command []string
+var Commands []string
 var Message bool
+var Prefixes []string
 
 func init() {
 	loadConfig()
@@ -27,6 +29,7 @@ func init() {
 func loadConfig() {
 	pluginConfig.ReadJson("config.json", &config)
 	WebsocketHost = config.WebsocketHost
-	Command = config.Command
+	Commands = config.Commands
 	Message = config.Message
+	Prefixes = config.Prefixes
 }

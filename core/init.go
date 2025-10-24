@@ -20,8 +20,10 @@ func init() {
 			getMessage(message)
 		}
 	})
-	for _, name := range config.Command {
-		pluginIO.CommandRegister(name, getMessage)
+	for _, name := range config.Commands {
+		for _, prefix := range config.Prefixes {
+			pluginIO.CommandRegister(prefix+name, getMessage)
+		}
 	}
 	pluginIO.OperatorMap["return"] = func(message pluginIO.Message) {
 		if message.SubType == "self_id" {
@@ -62,6 +64,7 @@ func Start() {
 
 func getMessage(msg pluginIO.Message) {
 	if msg.PostType == "command" {
+		log.Println("get command: ", msg.CommandArgs[0])
 		msg.PostType = "message"
 	}
 	data, _ := json.Marshal(msg)
