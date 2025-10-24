@@ -25,6 +25,9 @@ func init() {
 			pluginIO.CommandRegister(prefix+name, getMessage)
 		}
 	}
+	for _, name := range config.NoPrefixCommands {
+		pluginIO.CommandRegister(name, getMessage)
+	}
 	pluginIO.OperatorMap["return"] = func(message pluginIO.Message) {
 		if message.SubType == "self_id" {
 			selfId, _ = strconv.ParseInt(message.CommandArgs[0], 10, 64)
