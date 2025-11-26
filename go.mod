@@ -3,7 +3,7 @@ module MikaProxyPlugin
 go 1.25.1
 
 require (
-	github.com/MikaBot-Project/MikaPluginLib v0.2.2
+	github.com/MikaBot-Project/MikaPluginLib v0.2.3
 	github.com/lxzan/gws v1.8.9
 )
 

@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/MikaBot-Project/MikaPluginLib/pluginIO"
 	"github.com/lxzan/gws"
@@ -60,7 +61,10 @@ func Start() {
 		WriteMaxPayloadSize: 1024 * 1024,
 	})
 	if err != nil {
-		log.Println(err)
+		log.Println("get conn err:", err)
+		time.Sleep(5 * time.Second)
+		Start()
+		return
 	}
 	conn.ReadLoop()
 }
